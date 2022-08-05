@@ -31,10 +31,10 @@ export class SlackManifest {
   export() {
     const def = this.definition;
     const manifest: ManifestSchema = {
-      _metadata: {
-        // todo: is there a more idiomatic way of defining this? constant file?
-        major_version: 2,
-      },
+      // _metadata: {
+      //   // todo: is there a more idiomatic way of defining this? constant file?
+      //   major_version: 2,
+      // },
       display_information: {
         background_color: def.backgroundColor,
         name: def.name,
