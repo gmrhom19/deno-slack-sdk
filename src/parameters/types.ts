@@ -16,7 +16,8 @@ export type TypedParameterDefinition =
   | TypedObjectParameterDefinition
   | UntypedObjectParameterDefinition
   | PrimitiveParameterDefinition
-  | OAuth2ParameterDefinition;
+  | OAuth2ParameterDefinition
+  | BindingsParameterDefinition;
 
 export type CustomTypeParameterDefinition =
   & Omit<BaseParameterDefinition<AllValues>, "type">
@@ -108,6 +109,23 @@ type NumberParameterDefinition = BaseParameterDefinition<number> & {
 export type OAuth2ParameterDefinition = BaseParameterDefinition<string> & {
   type: typeof SlackPrimitiveTypes.oauth2;
   oauth2_provider_key: string;
+};
+
+export type BindingsParameterDefinition =
+  & BaseParameterDefinition<ObjectValue>
+  & {
+    /** input bindings for an API */
+    inputs: BindingsInputsParameterDefinition;
+    /** output bindings for an API */
+    outputs: ObjectValue;
+  };
+
+export type BindingsInputsParameterDefinition = {
+  uri: string;
+  method: "GET" | "POST" | string;
+  headers?: ObjectValue;
+  params?: ObjectValue;
+  body?: ObjectValue;
 };
 
 type EnumChoice<T> = {

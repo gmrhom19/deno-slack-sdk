@@ -213,10 +213,30 @@ export type ManifestFunctionSchema = {
   title?: string;
   description?: string;
   source_file: string;
+  type?: string;
+  bindings?: ManifestFunctionBindingsParameter;
   input_parameters: ManifestFunctionParameters;
   output_parameters: ManifestFunctionParameters;
 };
 
+export type ManifestFunctionBindingsParameter = {
+  inputs: {
+    uri: string;
+    method: string;
+    params?: {
+      [name: string]: unknown;
+    };
+    headers?: {
+      [name: string]: unknown;
+    };
+    body?: {
+      [name: string]: unknown;
+    };
+  };
+  outputs: {
+    [key: string]: unknown;
+  };
+};
 export type ManifestFunctionParameters = {
   required?: RequiredParameters;
   properties: ParameterSetDefinition;

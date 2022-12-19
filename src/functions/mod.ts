@@ -59,6 +59,8 @@ export class SlackFunctionDefinition<
       title: this.definition.title,
       description: this.definition.description,
       source_file: this.definition.source_file,
+      type: this.definition.type ?? "",
+      bindings: this.definition.bindings ?? undefined,
       input_parameters: this.definition.input_parameters ??
         { properties: {}, required: [] },
       output_parameters: this.definition.output_parameters ??

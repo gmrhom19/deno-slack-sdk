@@ -8,6 +8,7 @@ import {
   PossibleParameterKeys,
 } from "../parameters/mod.ts";
 import {
+  BindingsParameterDefinition,
   CustomTypeParameterDefinition,
   TypedArrayParameterDefinition,
   TypedObjectParameterDefinition,
@@ -71,9 +72,9 @@ type FunctionInputRuntimeType<
   // Recurse through Custom Types, stop when we hit our max depth
   CurrentDepth extends MaxRecursionDepth ? UnknownRuntimeType
     : Param extends CustomTypeParameterDefinition ? FunctionInputRuntimeType<
-        Param["type"]["definition"],
-        IncreaseDepth<CurrentDepth>
-      >
+      Param["type"]["definition"],
+      IncreaseDepth<CurrentDepth>
+    >
     : Param["type"] extends typeof SchemaTypes.string ? string // Not a Custom Type, so assign the runtime value
     : Param["type"] extends
       | typeof SchemaTypes.integer
@@ -103,10 +104,10 @@ type UnknownRuntimeType = any;
 type TypedObjectFunctionInputRuntimeType<
   Param extends TypedObjectParameterDefinition,
 > = Param["additionalProperties"] extends false ? {
-    [k in keyof Param["properties"]]: FunctionInputRuntimeType<
-      Param["properties"][k]
-    >;
-  }
+  [k in keyof Param["properties"]]: FunctionInputRuntimeType<
+    Param["properties"][k]
+  >;
+}
   : 
     & {
       [k in keyof Param["properties"]]: FunctionInputRuntimeType<
@@ -327,6 +328,9 @@ export type FunctionDefinitionArgs<
   source_file: string;
   /** An optional description for your function. */
   description?: string;
+  /** An optional type for your function to support API functions. */
+  type?: "API" | string;
+  bindings?: BindingsParameterDefinition;
   /** An optional map of input parameter names containing information about their type, title, description, required and (additional) properties. */
   "input_parameters"?: ParameterPropertiesDefinition<
     InputParameters,
