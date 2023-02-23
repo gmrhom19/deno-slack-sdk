@@ -12,5 +12,5 @@ export const OAuthType = DefineType({
       enum: ["DEVELOPER"], // TODO: Double check these are the available values
     },
   },
-  required: ["credential_source"],
+  required: [], // TODO [brk-chg]: Make `credential_source` required
 });
