@@ -9,7 +9,7 @@ export const OAuthType = DefineType({
   properties: {
     credential_source: {
       type: SchemaTypes.string,
-      enum: ["DEVELOPER"], // TODO: Double check these are the available values
+      enum: ["DEVELOPER", "END_USER"], // TODO: Double check these are the available values
     },
   },
   required: [], // TODO [brk-chg]: Make `credential_source` required
