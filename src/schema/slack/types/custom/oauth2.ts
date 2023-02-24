@@ -9,6 +9,7 @@ export const OAuthType = DefineType({
   properties: {
     credential_source: {
       type: SchemaTypes.string,
+      description: "Which user's OAuth credentials that should be used", // TODO: Is there a shared description for this?
       enum: ["DEVELOPER", "END_USER"], // TODO: Double check these are the available values
     },
   },
